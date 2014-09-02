@@ -97,7 +97,7 @@ Clone Repo
 
 2) Once the SDK is downloaded run our setup program to generate a configuration file.
 
-> cd litle-sdk-for-php/lib
+> cd litle/sdk/
 
 > php Setup.php
 
