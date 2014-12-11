@@ -22,42 +22,9 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-#require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
 namespace litle\sdk;
-class LitleXmlMapper
-{
-    public function __construct()
-    {
-    }
-
-    public function request($request,$hash_config=NULL,$useSimpleXml)
-    {
-        $response = Communication::httpRequest($request,$hash_config);
-        if ($useSimpleXml) {
-            $respObj = simplexml_load_string($response);
-        } else {
-            $respObj = XmlParser::domParser($response);
-        }
-
-        return $respObj;
-    }
-    
-    /**
-     * Handle multiple requests and stores the results.
-     *
-     * @param array Requests.  Each should be an array of (XML request, hash config, LitleCurlResponse).
-     */
-    public function requests(array $requests, $useSimpleXml)
-    {
-        $response = Communication::httpRequests($requests);
-        foreach ($requests as $request)
-        {
-            if ($useSimpleXml) {
-                $request[2]->response = simplexml_load_string($request[2]->response);
-            } else {
-                $request[2]->response = XmlParser::domParser($request[2]->response);
-            }
-        }
-    }
-
+class LitleCurlResponse {
+  public $response = null;
+	public $errno = null;
+	public $error = null;
 }

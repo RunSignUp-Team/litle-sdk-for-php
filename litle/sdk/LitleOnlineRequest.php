@@ -26,7 +26,8 @@ namespace litle\sdk;
 require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
 class LitleOnlineRequest
 {
-    private $useSimpleXml = false;
+    protected $useSimpleXml = false;
+    protected $newXML = null;
 
     public function __construct($treeResponse=false)
     {
@@ -525,7 +526,7 @@ class LitleOnlineRequest
         return $txnResponse;
     }
 
-    private static function overrideConfig($hash_in)
+    protected static function overrideConfig($hash_in)
     {
         $hash_config = array();
         $names = explode(',', LITLE_CONFIG_LIST);
@@ -539,7 +540,7 @@ class LitleOnlineRequest
         return $hash_config;
     }
 
-    private static function getOptionalAttributes($hash_in,$hash_out)
+    protected static function getOptionalAttributes($hash_in,$hash_out)
     {
         if (isset($hash_in['merchantSdk'])) {
             $hash_out['merchantSdk'] = XmlFields::returnArrayValue($hash_in,'merchantSdk');
@@ -559,7 +560,7 @@ class LitleOnlineRequest
         return $hash_out;
     }
 
-    private function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
+    protected function processRequest($hash_out, $hash_in, $type, $choice1 = null, $choice2 = null)
     {
         $hash_config = LitleOnlineRequest::overrideConfig($hash_in);
         $hash = LitleOnlineRequest::getOptionalAttributes($hash_in,$hash_out);
