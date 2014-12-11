@@ -27,7 +27,7 @@ require_once realpath(dirname(__FILE__)) . '/LitleOnline.php';
 class LitleOnlineRequest
 {
     protected $useSimpleXml = false;
-    protected $newXML = null;
+    public $newXML = null;
 
     public function __construct($treeResponse=false)
     {
